@@ -43,15 +43,18 @@ void main(){
     // Normalized pixel coordinates (from 0 to 1)
     // Get coordinates of mouse normalized to screen
     vec2 uv = (gl_FragCoord.xy - 0.5 * u_resolution.xy) /u_resolution.y;
-    uv *= 4.0;
+    
     vec3 color = vec3(0.0);
 
     // Draw mandelbrot in background
+    uv *= 4.0;
     uv += vec2(-0.5, 0.0);
     color += mandelbrot(uv) * 0.2;
     
     // Calculate Julia set based on mouse position
-    vec2 mouse =  u_mouse.xy / u_resolution.xy;
+    vec2 mouse =  (u_mouse.xy - 0.5 * u_resolution.xy) / u_resolution.y;
+    mouse *= 4.0;
+    mouse += vec2(-0.5, 0.0);
     color += julia(uv, mouse);
 
     gl_FragColor = vec4(color, 1.0);

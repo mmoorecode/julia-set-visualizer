@@ -21,7 +21,7 @@ int main()
 	sprite.setTexture(texture);
 
 	shader.setUniform("u_time", (float)clock.getElapsedTime().asSeconds());
-	shader.setUniform("u_resolution", sf::Vector2f(width, height));
+	shader.setUniform("u_resolution", sf::Vector2f(window.getSize().x, window.getSize().y));
 
 	while (window.isOpen())
 	{
@@ -37,8 +37,8 @@ int main()
 		sf::Vector2i mousePos = sf::Mouse::getPosition(window);
 
 		shader.setUniform("u_time", (float)clock.getElapsedTime().asSeconds());
-		shader.setUniform("u_resolution", sf::Vector2f(width, height));
-		shader.setUniform("u_mouse", sf::Vector2f(mousePos.x, mousePos.y - height / 2));
+		shader.setUniform("u_resolution", sf::Vector2f(window.getSize().x, window.getSize().y));
+		shader.setUniform("u_mouse", sf::Vector2f(mousePos.x, mousePos.y));
 
 		window.clear();
 		window.draw(sprite, &shader);
